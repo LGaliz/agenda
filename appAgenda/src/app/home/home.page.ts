@@ -18,7 +18,9 @@ export class HomePage implements OnInit {
       this.events = events;
     });
   }
-  onRemove(idEvent: string){
-    this.eventsService.removeEvent(idEvent);
-  }
+//  async onRemoveEvent(idEvent: string){
+//     // this.eventsService.removeEvent(idEvent);
+//     console.log(idEvent);
+//   }
 }
+

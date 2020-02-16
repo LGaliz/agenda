@@ -8,9 +8,9 @@
  <ion-content>
   <ion-list>
     <ng-container *ngIf="!events || events.length == 0">
-      <div *ngFor="let n of [0,1,2]" padding>
+      <div>
         <ion-skeleton-text></ion-skeleton-text>
-        <p>
+        <p> Haz Click en el boton azul para agregar eventos!
           <ion-skeleton-text class="text-skeleton"></ion-skeleton-text>
         </p>
       </div>
@@ -24,9 +24,9 @@
       </ion-item>
  
       <ion-item-options side="end">
-        <ion-item-option (click)="remove(item)" color="secondary">
-          Check
-          <ion-icon name="checkmark" slot="end"></ion-icon>
+        <ion-item-option (click)="onRemoveEvent(item)" color="danger">
+          BORRAR
+          <ion-icon name="trash" slot="end"></ion-icon>
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>

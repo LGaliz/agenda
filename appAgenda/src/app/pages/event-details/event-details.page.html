@@ -7,18 +7,29 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
+  <form #eventForm="ngForm"  (ngSubmit)="saveEvent()">
   <ion-list lines="full">
     <ion-item *ngIf="event">
-      <ion-input required type="text" placeholder="Titulo" [(ngModel)]="event.title"></ion-input>
+      <ion-input required type="text" placeholder="Titulo" [(ngModel)]="event.title" name= "title" ></ion-input>
     </ion-item>
     <ion-item *ngIf="event">
-      <ion-input required type="text" placeholder="Descripcion" [(ngModel)]="event.description"></ion-input>
+      <ion-input type="text" placeholder="Descripcion" [(ngModel)]="event.description"  name= "description"></ion-input>
+    </ion-item>
+    <ion-item [hidden]="date">
+      <ion-label>Fecha</ion-label>
+      <ion-datetime (ngModelChange)="change(datePicker)" displayFormat="DD/MMM/YYYY HH:mm" picker-format= "DD/MMM/YYYY"  [(ngModel)]="event.date" name="date"></ion-datetime>
+    </ion-item>
+    <ion-item [hidden]="date" >
+      <ion-label>Hora</ion-label>
+      <ion-datetime #datePicker
+      (ionCancel)="date=undefined" displayFormat="HH:mm"></ion-datetime>
     </ion-item>
   </ion-list>
-  <ion-button expand="full" (click)="saveEvent()">Save</ion-button>
+  <ion-button type="submit" [disabled]="!eventForm.form.valid" expand="full" >Guardar</ion-button>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="danger">
       <ion-fab-button color="danger" (click)="onRemoveEvent(eventId)" routerLink="/" routerDirection="forward">        <!-- Get FireBase Id  -->
           <ion-icon name="trash"></ion-icon>
       </ion-fab-button>
     </ion-fab>
+  </form>
 </ion-content>

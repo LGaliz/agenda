@@ -67,4 +67,7 @@ constructor(private route: ActivatedRoute, private nav: NavController, private e
      this.eventsService.removeEvent(idEvent);
      console.log('Event delete');
     }
+    change(datePicker: any){
+      datePicker.open();
+    }
   }
