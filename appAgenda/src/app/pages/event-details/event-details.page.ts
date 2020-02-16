@@ -15,12 +15,14 @@ export class EventDetailsPage implements OnInit {
     event: EventI = {
        //_id: '',
        title: '',
-     //  date: Date,
+       date: '',//new Date().toISOString(),
        user: '',
        description: '',
-       type: '',
+       type: 'Cita',
     };
 
+    myTime= new Date().toISOString();
+    customDayShortNames = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
      eventId = null;
 
 constructor(private route: ActivatedRoute, private nav: NavController, private eventsService: EventsService,
@@ -63,11 +65,22 @@ constructor(private route: ActivatedRoute, private nav: NavController, private e
         });
       }
     }
+
     async onRemoveEvent(idEvent: string) {
      this.eventsService.removeEvent(idEvent);
      console.log('Event delete');
     }
+
+    hola(e){
+      console.log(e);
+    }
     change(datePicker: any){
+      console.log("date",this.event.date);
+   //   console.log("datePicker",datePicker);
       datePicker.open();
+    }
+    dateChanged(date){
+      console.log(date.detail.value);
+      console.log(this.myDate);
     }
   }

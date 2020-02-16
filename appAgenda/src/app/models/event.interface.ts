@@ -1,8 +1,8 @@
 export interface EventI {
     _id?: string;
     title: string;
-    date?: Date;
+    date: string;
     description?: string;
-    user: string; // User id
     type: string;
+    user: string; // User id
 }
