@@ -12,6 +12,14 @@ const routes: Routes = [
     path: 'details',
     loadChildren: () => import('./pages/event-details/event-details.module').then( m => m.EventDetailsPageModule)
   },
+  {
+    path: 'terms',
+    loadChildren: () => import('./pages/terms/terms.module').then( m => m.TermsPageModule)
+  },
+  {
+    path: 'privacy',
+    loadChildren: () => import('./pages/privacy/privacy.module').then( m => m.PrivacyPageModule)
+  },
 ];
 
 @NgModule({

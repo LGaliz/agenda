@@ -3,14 +3,18 @@
     <ion-title>
       AGENDA
     </ion-title>
+    <ion-button slot="end" *ngIf="afAuth.auth.currentUser" (click)="signOut()">Cerrar Sesion</ion-button>
   </ion-toolbar>
 </ion-header>
  <ion-content>
-  <ion-list>
+  <firebase-ui></firebase-ui>
+  <ion-list *ngIf="afAuth.auth.currentUser">
     <ng-container *ngIf="!events || events.length == 0">
       <div>
         <ion-skeleton-text></ion-skeleton-text>
-        <h3> Haz Click en el boton azul para agregar eventos!</h3>
+        <h5 text-align: center> No tienes ningún evento <br><br>
+         Haz click en el botón azul<br>
+        para agregar eventos!</h5>
           <ion-skeleton-text class="text-skeleton"></ion-skeleton-text>
       </div>
     </ng-container>

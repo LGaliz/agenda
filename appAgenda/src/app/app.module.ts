@@ -12,6 +12,40 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import {FirebaseUIModule, firebase, firebaseui} from 'firebaseui-angular';
+
+//import {AngularFireModule} from '@angular/fire';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+
+const firebaseUiAuthConfig: firebaseui.auth.Config = {
+  signInFlow: 'popup',
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    {
+      scopes: [
+        'public_profile',
+        'email',
+        'user_likes',
+        'user_friends'
+      ],
+      customParameters: {
+        'auth_type': 'reauthenticate'
+      },
+      provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID
+    },
+    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+    firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    {
+      requireDisplayName: false,
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID
+    },
+    firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+    firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+  ],
+  tosUrl: '/terms',
+  privacyPolicyUrl: '/privacy',
+  credentialHelper: firebaseui.auth.CredentialHelper.NONE
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +56,9 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    AngularFireAuthModule,
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig)
+ 
   ],
   providers: [
     StatusBar,
