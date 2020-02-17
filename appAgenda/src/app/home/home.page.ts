@@ -15,8 +15,9 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.eventsService.getEvents().subscribe((events) => {
-      console.log('Citas', events);
+    //  console.log('Citas', events);
       this.events = events;
+    //  console.log(this.eventsService.timeService)
     });
   }
 

@@ -12,6 +12,7 @@ export class EventsService {
   private eventCollection: AngularFirestoreCollection<EventI>;
   private events: Observable<EventI[]>;
   private eventType: string;
+  public timeService: string;
 
   constructor(db: AngularFirestore) {
     this.eventCollection = db.collection<EventI>('events', ref => ref.orderBy('date', 'asc'));
@@ -41,6 +42,13 @@ export class EventsService {
   }
   getData () {
     return this.eventType;
+  }
+
+  setTime(data: string) {
+    this.timeService = data;
+  }
+  getTime () {
+    return this.timeService;
   }
 
   getEvents() {

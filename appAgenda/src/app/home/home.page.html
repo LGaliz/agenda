@@ -12,10 +12,12 @@
         <ion-skeleton-text></ion-skeleton-text>
         <h3> Haz Click en el boton azul para agregar eventos!</h3>
           <ion-skeleton-text class="text-skeleton"></ion-skeleton-text>
-        
       </div>
     </ng-container>
-    <ion-item-sliding *ngFor="let event of events">
+    <ion-item-sliding *ngFor="let event of events,let i = index, let isFirst = first">
+      <ion-list-header *ngIf="isFirst || ((event.date | date: 'dd/MM/yy') != (events[i -1].date | date: 'dd/MM/yy'))"> 
+        {{event.date | date: 'dd/MM/yy'}}
+      </ion-list-header>
       <ion-item lines="inset" button [routerLink]="['/details', event.id]">
         <ion-avatar slot="start">
           <img src="../../assets/icon/{{event.type}}.svg">

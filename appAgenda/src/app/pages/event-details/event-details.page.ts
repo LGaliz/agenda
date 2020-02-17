@@ -20,6 +20,7 @@ export class EventDetailsPage implements OnInit {
        type: '',
     };
     eventId = null;
+    time=null;
 
     customDayShortNames = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
     // myTime = new Date().toISOString();
