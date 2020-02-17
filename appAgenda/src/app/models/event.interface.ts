@@ -1,7 +1,7 @@
 export interface EventI {
-    _id?: string;
+    id?: string;
     title: string;
-    date: string;
+    date: string;   //ISO date
     description?: string;
     type: string;
     user: string; // User id

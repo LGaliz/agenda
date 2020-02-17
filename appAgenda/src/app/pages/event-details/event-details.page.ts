@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { EventI } from '../../models/event.interface';
 import { EventsService } from '../../services/events.service';
 import { ActivatedRoute} from '@angular/router';
@@ -13,26 +13,32 @@ import { NavController, LoadingController } from '@ionic/angular';
 export class EventDetailsPage implements OnInit {
 
     event: EventI = {
-       //_id: '',
        title: '',
-       date: '',//new Date().toISOString(),
+       date: '', // new Date().toISOString(),
        user: '',
        description: '',
-       type: 'Cita',
+       type: '',
     };
+    eventId = null;
 
-    myTime= new Date().toISOString();
     customDayShortNames = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
-     eventId = null;
+    // myTime = new Date().toISOString();
 
 constructor(private route: ActivatedRoute, private nav: NavController, private eventsService: EventsService,
             private loadingController: LoadingController) { }
 
     ngOnInit() {
+      console.log(this.eventsService.getData())
       this.eventId = this.route.snapshot.params.id;
       if (this.eventId) {
         this.loadEvent();
+      } else {
+          this.setType();
       }
+    }
+    
+    setType(){
+      this.event.type = this.eventsService.getData();
     }
 
     async loadEvent() {
@@ -71,9 +77,6 @@ constructor(private route: ActivatedRoute, private nav: NavController, private e
      console.log('Event delete');
     }
 
-    hola(e){
-      console.log(e);
-    }
     change(datePicker: any){
       console.log("date",this.event.date);
    //   console.log("datePicker",datePicker);
@@ -81,6 +84,6 @@ constructor(private route: ActivatedRoute, private nav: NavController, private e
     }
     dateChanged(date){
       console.log(date.detail.value);
-      console.log(this.myDate);
+      // console.log(this.myDate);
     }
   }

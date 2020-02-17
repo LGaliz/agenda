@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { EventI } from '../models/event.interface';
 import { EventsService } from '../services/events.service';
 
@@ -7,17 +7,19 @@ import { EventsService } from '../services/events.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage implements OnInit {
   events: EventI[];
 
   constructor(private eventsService: EventsService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.eventsService.getEvents().subscribe((events) => {
       console.log('Citas', events);
       this.events = events;
     });
   }
+
 //  async onRemoveEvent(idEvent: string){
 //     // this.eventsService.removeEvent(idEvent);
 //     console.log(idEvent);

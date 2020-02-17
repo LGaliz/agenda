@@ -11,6 +11,7 @@ export class EventsService {
 
   private eventCollection: AngularFirestoreCollection<EventI>;
   private events: Observable<EventI[]>;
+  private eventType: string;
 
   constructor(db: AngularFirestore) {
     this.eventCollection = db.collection<EventI>('events');
@@ -23,6 +24,12 @@ export class EventsService {
         });
       })
     );
+  }
+  setEventType (data) {
+    this.eventType = data;
+  }
+  getData () {
+    return this.eventType;
   }
 
   getEvents(){
