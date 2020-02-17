@@ -4,17 +4,19 @@
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title>{{event.type | uppercase}}</ion-title>
-    <ion-button slot="end" *ngIf="userService.afAuth.auth.currentUser" (click)="userService.signOut()" routerLink="/"  >Cerrar Sesión </ion-button>
+    <ion-button slot="end" *ngIf="userService.afAuth.auth.currentUser" (click)="userService.signOut()" routerLink="/" >Cerrar Sesión </ion-button>
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
+  <img id="eventIconType" src="../../assets/icon/{{event.type}}.svg">
+  <!-- <img id="eventIconType" [src]="''../../assets/icon/'+'cita.svg'"> -->
   <form #eventForm="ngForm"  (ngSubmit)="saveEvent()">
   <ion-list lines="full">
     <ion-item *ngIf="event">
       <ion-input required type="text" placeholder="Titulo" [(ngModel)]="event.title" name= "title" ></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Fecha</ion-label>
+      <ion-label *ngIf="!event.date" color="medium">Fecha</ion-label>
       <!-- (ngModelChange)="change(datePicker)"   -->
       <ion-datetime required [(ngModel)]="event.date" name="date"  (ionCancel)="event.date=undefined "
       displayFormat="HH:mm ---- DDD DD MMM YYYY" 
