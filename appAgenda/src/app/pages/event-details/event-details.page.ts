@@ -76,6 +76,8 @@ constructor(private route: ActivatedRoute, private nav: NavController, private e
 
     async onRemoveEvent(idEvent: string) {
      this.eventsService.removeEvent(idEvent);
+     console.log(idEvent);
+    
      console.log('Event delete');
     }
 

@@ -24,8 +24,8 @@ export class HomePage implements OnInit {
     //this.userService.afAuth= ;
   }
 
-//  async onRemoveEvent(idEvent: string){
-//     // this.eventsService.removeEvent(idEvent);
-//     console.log(idEvent);
-//   }
+ async onRemoveEvent(idEvent: string){
+     this.eventsService.removeEvent(idEvent);
+    // console.log(idEvent);
+  }
 }
