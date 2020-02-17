@@ -10,13 +10,17 @@
     <ng-container *ngIf="!events || events.length == 0">
       <div>
         <ion-skeleton-text></ion-skeleton-text>
-        <p> Haz Click en el boton azul para agregar eventos!
+        <h3> Haz Click en el boton azul para agregar eventos!</h3>
           <ion-skeleton-text class="text-skeleton"></ion-skeleton-text>
-        </p>
+        
       </div>
     </ng-container>
     <ion-item-sliding *ngFor="let event of events">
       <ion-item lines="inset" button [routerLink]="['/details', event.id]">
+        <ion-avatar slot="start">
+          <img src="../../assets/icon/{{event.type}}.svg">
+        </ion-avatar>
+        
         <ion-label>
           {{ event.title }}
         </ion-label>
@@ -36,14 +40,14 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   <ion-fab-list side="top">
-    <ion-fab-button routerLink="/details" (click)="eventsService.setEventType('Cita')" routerDirection="forward">
-      <img  src="../../assets/icon/event.svg">
+    <ion-fab-button routerLink="/details" (click)="eventsService.setEventType('cita')" routerDirection="forward">
+      <img  src="../../assets/icon/cita.svg">
     </ion-fab-button>
-    <ion-fab-button routerLink="/details" (click)="eventsService.setEventType('Nota')" routerDirection="forward">
-      <img  src="../../assets/icon/notes.svg">
+    <ion-fab-button routerLink="/details" (click)="eventsService.setEventType('nota')" routerDirection="forward">
+      <img  src="../../assets/icon/nota.svg">
     </ion-fab-button>
-    <ion-fab-button routerLink="/details" (click)="eventsService.setEventType('Aniversario')" routerDirection="forward">
-      <img  src="../../assets/icon/cake.svg">
+    <ion-fab-button routerLink="/details" (click)="eventsService.setEventType('aniversario')" routerDirection="forward">
+      <img  src="../../assets/icon/aniversario.svg">
     </ion-fab-button>
   </ion-fab-list>
  </ion-fab>

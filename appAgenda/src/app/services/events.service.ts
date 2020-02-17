@@ -14,7 +14,7 @@ export class EventsService {
   private eventType: string;
 
   constructor(db: AngularFirestore) {
-    this.eventCollection = db.collection<EventI>('events');
+    this.eventCollection = db.collection<EventI>('events', ref => ref.orderBy('date', 'asc'));
     this.events = this.eventCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -25,18 +25,29 @@ export class EventsService {
       })
     );
   }
-  setEventType (data) {
+
+  // sortEvents() {
+  //   if (this.eventCollection) {
+  //     this.eventCollection.sort((a, b) => {
+  //       let dateB = new Date(a.date).getTime()
+  //       let dateA = new Date(b.date).getTime()
+  //       return dateA - dateB
+  //     });
+  //   }
+  // }
+
+  setEventType(data: string) {
     this.eventType = data;
   }
   getData () {
     return this.eventType;
   }
 
-  getEvents(){
+  getEvents() {
     return this.events;
   }
 
-  getEvent(id: string){
+  getEvent(id: string) {
     return this.eventCollection.doc<EventI>(id).valueChanges();
   }
 
@@ -44,11 +55,11 @@ export class EventsService {
     return this.eventCollection.doc(id).update(event);
   }
 
-  addEvent(event: EventI){
+  addEvent(event: EventI) {
     return this.eventCollection.add(event);
   }
 
-  removeEvent(id: string){
+  removeEvent(id: string) {
     return this.eventCollection.doc(id).delete();
   }
 
