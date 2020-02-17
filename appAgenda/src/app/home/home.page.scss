@@ -30,7 +30,16 @@ ion-content ion-toolbar {
   --background: translucent;
 }
 
-h4{
+h5{
   text-align: center;
-  padding: 100px;
+}
+#calendar{
+  height: 50vh;
+  width: auto;
+  margin: auto;
+  display: block;
+}
+
+img.event:hover{
+  transform: scale(1.50,1.50)
 }
