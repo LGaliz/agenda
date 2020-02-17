@@ -1,2 +1,2 @@
 # agenda
-Agenda Calendario de citas con Angualar y Firebase
+Agenda Calendario de citas con Angular y Firebase
