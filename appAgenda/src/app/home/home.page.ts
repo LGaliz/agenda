@@ -16,16 +16,12 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    this.eventsService.getEvents().subscribe((events) => {
-    //  console.log('Citas', events);
+    this.eventsService.getEvents().subscribe((events) => {    // Brings list of events after constructor
       this.events = events;
-    //  console.log(this.eventsService.timeService)
     });
-    //this.userService.afAuth= ;
   }
 
  async onRemoveEvent(idEvent: string){
      this.eventsService.removeEvent(idEvent);
-    // console.log(idEvent);
   }
 }

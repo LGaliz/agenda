@@ -8,7 +8,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class UserService {
   hasVerifiedEmail = true;
 
-  constructor(private afAuth: AngularFireAuth) { 
+  constructor(private afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.hasVerifiedEmail = this.afAuth.auth.currentUser.emailVerified;
@@ -21,8 +21,8 @@ export class UserService {
       location.reload();
     });
   }
-  
+
   reload() {
     window.location.reload();
   }
-  }
+}

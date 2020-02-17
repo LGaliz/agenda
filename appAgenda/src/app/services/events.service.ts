@@ -12,10 +12,9 @@ export class EventsService {
   private eventCollection: AngularFirestoreCollection<EventI>;
   private events: Observable<EventI[]>;
   private eventType: string;
-  public timeService: string;
 
   constructor(db: AngularFirestore) {
-    this.eventCollection = db.collection<EventI>('events', ref => ref.orderBy('date', 'asc'));
+    this.eventCollection = db.collection<EventI>('events', ref => ref.orderBy('date', 'asc'));          //Brings collection order by date
     this.events = this.eventCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -27,28 +26,11 @@ export class EventsService {
     );
   }
 
-  // sortEvents() {
-  //   if (this.eventCollection) {
-  //     this.eventCollection.sort((a, b) => {
-  //       let dateB = new Date(a.date).getTime()
-  //       let dateA = new Date(b.date).getTime()
-  //       return dateA - dateB
-  //     });
-  //   }
-  // }
-
   setEventType(data: string) {
     this.eventType = data;
   }
-  getData () {
+  getType () {
     return this.eventType;
-  }
-
-  setTime(data: string) {
-    this.timeService = data;
-  }
-  getTime () {
-    return this.timeService;
   }
 
   getEvents() {
@@ -64,12 +46,23 @@ export class EventsService {
   }
 
   addEvent(event: EventI) {
+    // console.log('New event', this.events)
     return this.eventCollection.add(event);
   }
 
   removeEvent(id: string) {
     return this.eventCollection.doc(id).delete();
   }
+
+  // sortEvents() {
+  //   if (this.eventCollection) {
+  //     this.eventCollection.sort((a, b) => {
+  //       let dateB = new Date(a.date).getTime()
+  //       let dateA = new Date(b.date).getTime()
+  //       return dateA - dateB
+  //     });
+  //   }
+  // }
 
 }
 

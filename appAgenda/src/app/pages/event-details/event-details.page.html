@@ -4,45 +4,43 @@
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title>{{event.type | uppercase}}</ion-title>
-    <ion-button slot="end" *ngIf="userService.afAuth.auth.currentUser" (click)="userService.signOut()" routerLink="/" >Cerrar Sesión </ion-button>
+    <ion-button slot="end" *ngIf="userService.afAuth.auth.currentUser" (click)="userService.signOut()" routerLink="/">
+      Cerrar Sesión 
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
   <img id="eventIconType" src="../../assets/icon/{{event.type}}.svg">
-  <!-- <img id="eventIconType" [src]="''../../assets/icon/'+'cita.svg'"> -->
-  <form #eventForm="ngForm"  (ngSubmit)="saveEvent()">
-  <ion-list lines="full">
-    <ion-item *ngIf="event">
-      <ion-input required type="text" placeholder="Titulo" [(ngModel)]="event.title" name= "title" ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label *ngIf="!event.date" color="medium">Fecha</ion-label>
-      <!-- (ngModelChange)="change(datePicker)"   -->
-      <ion-datetime required [(ngModel)]="event.date" name="date"  (ionCancel)="event.date=undefined "
-      displayFormat="HH:mm ---- DDD DD MMM YYYY" 
-      picker-format= "HH:mm DD/MMM/YYYY" 
-      min="2020-01-01" 
-      max="2021-12-31"
-      [dayShortNames]="customDayShortNames"
-      monthShortNames="Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre"   
-      cancel-text='Cancelar'
-      Done-text='OK'
-      >
-    </ion-datetime>
-    </ion-item>
-    <!-- <ion-item [disabled]="!event.date" >
+  <form #eventForm="ngForm" (ngSubmit)="saveEvent()">
+    <ion-list lines="full">
+      <ion-item *ngIf="event">
+        <ion-input required type="text" placeholder="Titulo" [(ngModel)]="event.title" name="title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label *ngIf="!event.date" color="medium">Fecha</ion-label>
+        <!-- (ngModelChange)="change(datePicker)"   -->
+        <ion-datetime required [(ngModel)]="event.date" name="date" (ionCancel)="event.date=undefined "
+          displayFormat="HH:mm ---- DDD DD MMM YYYY" picker-format="HH:mm DD/MMM/YYYY" min="2020-01-01" max="2021-12-31"
+          [dayShortNames]="customDayShortNames"
+          monthShortNames="Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre"
+          cancel-text='Cancelar' Done-text='OK'>
+        </ion-datetime>
+      </ion-item>
+      <!-- <ion-item [disabled]="!event.date" >
       <ion-label>Hora</ion-label>
       <ion-datetime #datePicker required [(ngModel)]="eventsService.timeService" name="timeService" 
       (ionCancel)="event.date=undefined" displayFormat="HH:mm"></ion-datetime>
     </ion-item> -->
-          <ion-item *ngIf="event">
-            <ion-textarea type="text" placeholder="Descripcion" [(ngModel)]="event.description"  name= "description" maxlength="400"></ion-textarea> 
-    </ion-item>          
-  </ion-list>
-  <ion-button type="submit" [disabled]="!eventForm.form.valid" expand="full" >Guardar</ion-button>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="danger">
-      <ion-fab-button color="danger" (click)="onRemoveEvent(eventId)" routerLink="/" routerDirection="forward">        <!-- Get FireBase Id  -->
-          <ion-icon name="trash"></ion-icon>
+      <ion-item *ngIf="event">
+        <ion-textarea type="text" placeholder="Descripcion" [(ngModel)]="event.description" name="description"
+          maxlength="400"></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <ion-button type="submit" [disabled]="!eventForm.form.valid" expand="full">Guardar</ion-button>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="danger">
+      <ion-fab-button color="danger" (click)="onRemoveEvent(eventId)" routerLink="/" routerDirection="forward">
+        <!-- Get FireBase Id  -->
+        <ion-icon name="trash"></ion-icon>
       </ion-fab-button>
     </ion-fab>
   </form>
