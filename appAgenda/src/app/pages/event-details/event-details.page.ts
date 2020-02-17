@@ -3,6 +3,7 @@ import { EventI } from '../../models/event.interface';
 import { EventsService } from '../../services/events.service';
 import { ActivatedRoute} from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-event-details',
@@ -26,7 +27,7 @@ export class EventDetailsPage implements OnInit {
     // myTime = new Date().toISOString();
 
 constructor(private route: ActivatedRoute, private nav: NavController, private eventsService: EventsService,
-            private loadingController: LoadingController) { }
+   private userService:UserService, private loadingController: LoadingController) { }
 
     ngOnInit() {
       console.log(this.eventsService.getData())
