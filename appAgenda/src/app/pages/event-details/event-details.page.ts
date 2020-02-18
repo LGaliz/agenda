@@ -13,16 +13,15 @@ import { UserService } from '../../services/user.service';
 
 export class EventDetailsPage implements OnInit {
 
-  event: EventI = { //inicialize event
+  event: EventI = { // inicialize event
     title: '',
     date: '',
-    user: '',
     description: '',
     type: '',
   };
   eventId = null;
 
-  //datePicker format
+  // datePicker format
   customDayShortNames = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
 
   constructor(private route: ActivatedRoute, private nav: NavController, private eventsService: EventsService,
@@ -37,7 +36,7 @@ export class EventDetailsPage implements OnInit {
     }
   }
 
-  //type setted by home page button click
+  // type setted by home page button click
   setType() {
     this.event.type = this.eventsService.getType();
   }

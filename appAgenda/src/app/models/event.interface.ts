@@ -4,5 +4,4 @@ export interface EventI {
     date: string;   //ISO date
     description?: string;
     type: string;
-    user: string; // User id
 }

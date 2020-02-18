@@ -3,6 +3,8 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EventI } from '../models/event.interface';
+import { UserService } from './user.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +15,18 @@ export class EventsService {
   private events: Observable<EventI[]>;
   private eventType: string;
 
-  constructor(db: AngularFirestore) {
-    this.eventCollection = db.collection<EventI>('events', ref => ref.orderBy('date', 'asc'));          //Brings collection order by date
+  constructor(public db: AngularFirestore, userService: UserService, private afAuth: AngularFireAuth) {
+
+  }
+
+  eventsFromServer(user) {   // Brings collection order by date
+    this.eventCollection = this.db.collection('users').doc(user).collection<EventI>('events', ref => ref.orderBy('date', 'asc'));
     this.events = this.eventCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data();
           const id = a.payload.doc.id;
-          return {id, ...data};
+          return { id, ...data };
         });
       })
     );
@@ -29,7 +35,7 @@ export class EventsService {
   setEventType(data: string) {
     this.eventType = data;
   }
-  getType () {
+  getType() {
     return this.eventType;
   }
 
@@ -41,7 +47,7 @@ export class EventsService {
     return this.eventCollection.doc<EventI>(id).valueChanges();
   }
 
-  updateEvent(event: EventI, id: string){
+  updateEvent(event: EventI, id: string) {
     return this.eventCollection.doc(id).update(event);
   }
 
