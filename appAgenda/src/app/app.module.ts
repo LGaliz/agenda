@@ -16,6 +16,10 @@ import {FirebaseUIModule, firebase, firebaseui} from 'firebaseui-angular';
 
 import {AngularFireAuthModule} from '@angular/fire/auth';
 
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { MessagingService } from './services/messaging.service';
+import { AsyncPipe } from '../../node_modules/@angular/common';
+
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
   signInOptions: [
@@ -40,10 +44,13 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    FirebaseUIModule.forRoot(firebaseUiAuthConfig)
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig),
+    AngularFireMessagingModule
  
   ],
   providers: [
+    MessagingService,
+    AsyncPipe,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
